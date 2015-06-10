@@ -1,4 +1,4 @@
-Yii 2 Basic Project Template
+Profession.hu Test
 ============================
 
 Small application for demonstrating activation of job listings. Example database in 'sql' directory (MySQL dump).
