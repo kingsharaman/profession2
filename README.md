@@ -1,7 +1,7 @@
 Profession.hu Test
 ============================
 
-Small application for demonstrating activation of job listings. Example database in 'sql' directory (MySQL dump).
+Small application for demonstrating activation of job listings. Example database in 'sql' directory (MySQL dump), interesting files are in 'views', 'models' and 'controllers' directories. Entry script (index.php) is in the 'web' directory.
 
 [![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-basic/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
 [![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-basic/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-basic)
