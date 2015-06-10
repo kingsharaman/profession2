@@ -87,8 +87,20 @@ class SiteController extends Controller
 		
 		$id = Yii::$app->request->post($model->formName())["id"];
 		
-		Yii::$app->db->createCommand('UPDATE job_listings SET status=\'aktív\' WHERE id=:id')->bindValue(':id', $id)->execute();
-		Yii::$app->db->createCommand('UPDATE job_listings SET activated=NOW() WHERE id=:id')->bindValue(':id', $id)->execute();
+		$affectedRows = Yii::$app->db->createCommand('UPDATE job_listings SET status=\'aktív\', activated=NOW()  WHERE id=:id AND status != \'aktív\'')->bindValue(':id', $id)->execute();
+		
+		if($affectedRows > 0) {
+			$listing[$model->formName()] = Yii::$app->db->createCommand('SELECT * FROM job_listings WHERE id=:id')->bindValue(':id', $id)->queryOne();
+			
+			$model->load($listing);
+			
+			mail($model->email, 'Hirdetés aktiválása', $model->id." azonosítójú hirdetését ".$model->activated."-kor sikeresen aktiváltuk.");		
+			
+			return $this->render('activate', ['model' => $model, 'layout' => 'main']);
+		}
+		else {
+			return $this->render('alreadyactive', ['model' => $model, 'layout' => 'main']);
+		}
 		
 		$listing[$model->formName()] = Yii::$app->db->createCommand('SELECT * FROM job_listings WHERE id=:id')->bindValue(':id', $id)->queryOne();
 		
